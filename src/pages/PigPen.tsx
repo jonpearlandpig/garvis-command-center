@@ -69,6 +69,22 @@ const OperatorCard = ({ op }: { op: Operator }) => {
       {/* Expanded Details */}
       {expanded && (
         <div className="border-t border-border p-5 space-y-4 bg-background/50">
+          {/* Always show role summary */}
+          <div className="flex gap-8 flex-wrap">
+            <div>
+              <div className="text-[10px] text-muted-foreground tracking-wider mb-1">ROLE</div>
+              <div className="text-xs">{op.title}</div>
+            </div>
+            <div>
+              <div className="text-[10px] text-muted-foreground tracking-wider mb-1">WEIGHT</div>
+              <div className="text-xs font-bold text-primary">{op.decision_weight} / 5</div>
+            </div>
+            <div>
+              <div className="text-[10px] text-muted-foreground tracking-wider mb-1">PHASES</div>
+              <div className="text-xs">{op.phase_ownership.join(" → ")}</div>
+            </div>
+          </div>
+
           {op.focus_areas && op.focus_areas.length > 0 && (
             <div>
               <div className="text-[10px] text-muted-foreground tracking-wider mb-2 flex items-center gap-1">
@@ -84,7 +100,7 @@ const OperatorCard = ({ op }: { op: Operator }) => {
             </div>
           )}
 
-          {op.thinking_style && (
+          {(op.thinking_style || op.core_instinct) && (
             <div className="flex gap-8">
               {op.thinking_style && (
                 <div>
@@ -137,6 +153,13 @@ const OperatorCard = ({ op }: { op: Operator }) => {
             <div>
               <div className="text-[10px] text-muted-foreground tracking-wider mb-1">ALIASES</div>
               <div className="text-xs">{op.aliases.join(", ")}</div>
+            </div>
+          )}
+
+          {/* Minimal profile indicator for operators without extended data */}
+          {!op.focus_areas && !op.thinking_style && !op.function && (
+            <div className="text-[10px] text-muted-foreground/50 tracking-wider italic border-t border-border/50 pt-3">
+              CORE PROFILE · EXTENDED ATTRIBUTES PENDING
             </div>
           )}
         </div>
