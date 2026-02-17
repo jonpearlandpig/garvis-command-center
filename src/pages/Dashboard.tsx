@@ -17,7 +17,7 @@ const stats = {
   total_documents: 12,
   total_glossary_terms: 47,
   total_components: 8,
-  total_pigpen_operators: 5,
+  total_pigpen_operators: 42,
   total_brand_profiles: 3,
 };
 
