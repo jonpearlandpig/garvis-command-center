@@ -64,10 +64,9 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
 
-## Can I connect a custom domain to my Lovable project?
 
-Yes, you can!
+# Merge History
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Merged useful parts from gogarvis-assistant (older Lovable starter with Supabase + AKB fetch wiring) into this primary Garvis dashboard.
+Kept command-center as canonical for AKB moat, onboarding quests, operator registry.
+Added: Supabase hooks, FastAPI backend URL env support, additional AKB and onboarding components/hooks.
