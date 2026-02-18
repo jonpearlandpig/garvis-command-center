@@ -16,7 +16,6 @@ The Garvis Governance PoC aims to provide an auditable, truth-focused AI governa
 ## Getting Started (Local Development)
 
 ### Prerequisites
-- Node.js (v18+) and npm/yarn
 - Docker and Docker Compose
 - Python (v3.11+ recommended) for the backend
 
@@ -82,6 +81,7 @@ services:
       - ./frontend:/app/frontend # Mount local code for hot-reloading (during development)
       - ./frontend/node_modules:/app/frontend/node_modules
 
+<<<<<<< HEAD
 # Add your backend/Dockerfile here as well if separate. Example:
 # backend/Dockerfile
 # FROM python:3.11-slim
@@ -154,3 +154,11 @@ Deploying to Vercel (Frontend Only)
 Backend Deployment
 
 For the backend, you can containerize it using the provided backend/Dockerfile and deploy it as an API service (e.g., on AWS Lambda, Google Cloud Run, or a traditional server). You'll need to manage its environment variables (like API keys, persistence DB connection strings).
+=======
+
+# Merge History
+
+Merged useful parts from gogarvis-assistant (older Lovable starter with Supabase + AKB fetch wiring) into this primary Garvis dashboard.
+Kept command-center as canonical for AKB moat, onboarding quests, operator registry.
+Added: Supabase hooks, FastAPI backend URL env support, additional AKB and onboarding components/hooks.
+>>>>>>> 4cc3439 (Merge gogarvis-assistant: add Supabase hooks, AKB, onboarding, FastAPI support, and unify Garvis frontend)
