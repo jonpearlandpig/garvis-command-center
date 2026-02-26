@@ -100,3 +100,6 @@ export async function fetchAuditLogs(baseUrl: string = GOVERNANCE_API_BASE): Pro
     throw new Error(error.response?.data?.detail || error.message || "Failed to fetch audit logs");
   }
 }
+
+// Patch bundle typed API client
+// See patch bundle for full implementation

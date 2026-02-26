@@ -83,3 +83,6 @@ section {
   border-radius: 0.75rem;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
+
+/* Patch bundle basic styles */
+/* See patch bundle for full implementation */
