@@ -1,3 +1,36 @@
+// --- Adapter Configuration ---
+
+export async function setAdapterApiKey(
+  adapterKey: string,
+  apiKey: string,
+  baseUrl: string = BACKEND_URL
+): Promise<void> {
+  const res = await fetch(`${baseUrl}/adapters/set_key`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ adapter_key: adapterKey, api_key: apiKey }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: 'Unknown error' }));
+    throw new Error(err.detail || 'Failed to set adapter key');
+  }
+}
+
+export async function setAdapterModel(
+  adapterKey: string,
+  modelName: string,
+  baseUrl: string = BACKEND_URL
+): Promise<void> {
+  const res = await fetch(`${baseUrl}/adapters/set_model`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ adapter_key: adapterKey, model_name: modelName }),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: 'Unknown error' }));
+    throw new Error(err.detail || 'Failed to set adapter model');
+  }
+}
 import axios from 'axios';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
