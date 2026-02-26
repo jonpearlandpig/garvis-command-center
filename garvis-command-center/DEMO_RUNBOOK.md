@@ -1,4 +1,4 @@
-# GARVIS PoC Demo Runbook (Groq-only, Vercel frontend, local backend)
+# GARVIS PoC Demo Runbook (Groq-first)
 
 Overview
 - Tech: Frontend Next.js (TypeScript) on Vercel; Backend Python FastAPI on local/dev container
