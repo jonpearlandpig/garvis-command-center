@@ -25,19 +25,19 @@ export async function setAdapterModel(
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ adapter_key: adapterKey, model_name: modelName }),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: 'Unknown error' }));
-    throw new Error(err.detail || 'Failed to set adapter model');
-  }
-}
+    id: string;
+    name: string;
+    owner: string;
+    created_at: string;
+    entries: any[];
+    linked_akbs: string[];
 import axios from 'axios';
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
-const GOVERNANCE_API_BASE = `${BACKEND_URL}/governance`;
-
-interface AKB {
-  id: string;
+    ok: boolean;
+    content: string;
+    explainability: string;
+    generated_at: string;
   name: string;
   owner: string;
   created_at: string;
