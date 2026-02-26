@@ -1,0 +1,42 @@
+# garvis-command-center/docker-compose.yml
+
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ../garvis42 # Path to backend repo
+      dockerfile: backend/Dockerfile # Assuming you'll create one for the backend
+    ports:
+      - "8000:80" # Map host 8000 to container 80 (FastAPI default)
+    environment:
+      # Set backend URL for frontend to connect to. In local docker-compose, use service name.
+      NEXT_PUBLIC_BACKEND_URL: http://backend:8000/governance
+      # Add any other backend specific env vars here
+      PERSISTENCE_DB_PATH: /app/garvis_governance.db # Example: Use a volume for SQLite store
+
+  frontend:
+    build:
+      context: . # Path to garvis-command-center repo
+      dockerfile: Dockerfile # Refers to the frontend Dockerfile created above
+    ports:
+      - "3000:3000" # Map host 3000 to container 3000 (Next.js default)
+    environment:
+      # Point frontend to backend service using its docker-compose name
+      NEXT_PUBLIC_BACKEND_URL: http://backend:8000/governance
+    depends_on:
+      - backend
+    # Use volumes for hot-reloading if developing locally with compose
+    volumes:
+      - ./frontend:/app/frontend
+      - ./frontend/node_modules:/app/frontend/node_modules
+
+# If you have a separate backend Dockerfile, add it here:
+# backend/Dockerfile
+# FROM python:3.11-slim
+# WORKDIR /app
+# COPY backend/requirements.txt .
+# RUN pip install --no-cache-dir -r requirements.txt
+# COPY backend/ .
+# EXPOSE 8000
+# CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

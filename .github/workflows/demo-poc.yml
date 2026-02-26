@@ -1,0 +1,67 @@
+# .github/workflows/demo-poc.yml
+
+name: GARVIS PoC CI - Backend & Frontend Tests
+
+on:
+  pull_request:
+    branches: [ main, master ] # Adjust branches as needed
+  push:
+    branches: [ main, master ] # Also run on push to main branches
+
+jobs:
+  backend-smoke:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout garvis42 repo
+        uses: actions/checkout@v3
+        with:
+          path: garvis42 # Checkout backend to a specific path
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          # Cache pip dependencies
+          cache: 'pip'
+
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r garvis42/backend/requirements.txt
+
+      - name: Run backend tests
+        run: |
+          # Ensure you're in the correct directory or use full paths
+          cd garvis42/backend
+          pytest -v tests/
+
+  frontend-smoke:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout garvis-command-center repo
+        uses: actions/checkout@v3
+        with:
+          path: garvis-command-center # Checkout frontend to a specific path
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          # Cache npm/yarn dependencies
+          cache: 'yarn' # Or 'npm' if you use npm
+
+      - name: Install frontend dependencies
+        run: |
+          cd garvis-command-center/frontend
+          yarn install --frozen-lockfile # Or npm ci
+
+      - name: Run frontend tests
+        run: |
+          cd garvis-command-center/frontend
+          npm test # or yarn test
