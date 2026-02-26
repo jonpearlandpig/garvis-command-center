@@ -1,0 +1,78 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Test: Single Run",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "ci"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "detail": "Install dependencies and run Vitest once"
+    },
+    {
+      "label": "Test: Run Tests",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "detail": "Run vitest once (same as npm run test)"
+    },
+    {
+      "label": "Test: Watch",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test:watch"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "detail": "Run vitest in watch mode"
+    },
+    {
+      "label": "Test: Coverage",
+      "type": "shell",
+      "command": "npm",
+      "args": [
+        "run",
+        "test",
+        "--",
+        "--coverage"
+      ],
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": "test",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "detail": "Run tests with coverage"
+    }
+  ]
+}
