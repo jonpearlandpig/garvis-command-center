@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { createAKB, runDemo, getAvailableAdapters, setLLMAdapter } from '../lib/api';
+// Placeholder imports for API functions
+// import { createAKB, runDemo, fetchDoc, getAvailableAdapters, setLLMAdapter } from '../lib/api';
+// import { BACKEND_URL } from '../lib/constants';
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000/governance';
+interface AKB {
+  id: string;
+  name: string;
+  owner: string;
+  created_at: string;
+  cac_policy: {
+    policy_type: string;
+    allowed_akb_ids: string[];
+    allow_all_akbs_for_search: boolean;
+  };
+  linked_akbs: string[];
+}
 
 interface DemoResult {
   ok: boolean;
@@ -15,67 +28,52 @@ interface AdapterInfo {
   [key: string]: string;
 }
 
-export default function DemoPage() {
+const DemoPage: React.FC = () => {
   const [name, setName] = useState('');
   const [owner, setOwner] = useState('');
   const [akbId, setAkbId] = useState<string | null>(null);
-  const [docResult, setDocResult] = useState<DemoResult | null>(null);
+  const [demoResult, setDemoResult] = useState<DemoResult | null>(null);
+
   const [availableAdapters, setAvailableAdapters] = useState<AdapterInfo>({});
-  const [selectedAdapter, setSelectedAdapter] = useState<string>('openai_like');
+  const [selectedAdapter, setSelectedAdapter] = useState<string>('local_mock');
+  const [policyType, setPolicyType] = useState<string>('single');
+  const [allowedAkbIds, setAllowedAkbIds] = useState<string>('');
 
   useEffect(() => {
-    async function loadAdapters() {
-      try {
-        const adapters = await getAvailableAdapters();
-        setAvailableAdapters(adapters);
-        const defaultKey = Object.keys(adapters).includes('openai_like') ? 'openai_like' : Object.keys(adapters)[0];
-        if (defaultKey) setSelectedAdapter(defaultKey);
-      } catch (error) {
-        console.error('Failed to load adapters:', error);
-      }
-    }
-    loadAdapters();
+    // Placeholder for loading adapters
+    setAvailableAdapters({ local_mock: 'Deterministic mock LLM', openai_like: 'OpenAI-like LLM' });
+    setSelectedAdapter('local_mock');
   }, []);
 
-  async function handleCreateAKB() {
+  const handleCreateAKB = async () => {
     if (!name || !owner) {
       alert('Please enter both AKB name and owner.');
       return;
     }
-    try {
-      const id = await createAKB({ name, owner }, BACKEND_URL);
-      setAkbId(id);
-      alert(`AKB created successfully with ID: ${id}`);
-    } catch (error: any) {
-      alert(`Error creating AKB: ${error.message}`);
-      console.error('Create AKB error:', error);
-    }
-  }
+    // Placeholder for AKB creation
+    setAkbId('mock-akb-id');
+    alert(`AKB "${name}" created successfully with ID: mock-akb-id`);
+  };
 
-  async function handleSetAdapter() {
+  const handleSetAdapter = async () => {
     if (!selectedAdapter) return;
-    try {
-      await setLLMAdapter(selectedAdapter, BACKEND_URL);
-      alert(`LLM Adapter set to: ${selectedAdapter}`);
-    } catch (error: any) {
-      alert(`Error setting adapter: ${error.message}`);
-      console.error('Set Adapter error:', error);
-    }
-  }
+    // Placeholder for setting adapter
+    alert(`LLM Adapter set to: ${selectedAdapter}`);
+  };
 
-  async function handleRunDemo() {
+  const handleRunDemo = async () => {
     if (!akbId) {
       alert('Please create an AKB first.');
       return;
     }
-    try {
-      const resultData = await runDemo(akbId, BACKEND_URL, selectedAdapter);
-      setDocResult(resultData);
-    } catch (error: any) {
-      alert(`Error running demo: ${error.message}`);
-      console.error('Run Demo error:', error);
-    }
-  }
+    // Placeholder for running demo
+    setDemoResult({
+      ok: true,
+      content: '--- Document for AKB: Demo ---\nOwner: DemoOwner\nCreated: 2026-02-25T00:00:00Z\nCAC Policy: single, Linked AKBs: None\n\n--- AI Content ---\nMock output from local LLM.',
+      explainability: 'Generated using adapter: local_mock. Sources: local_data, local_mock. Confidence: 1.00. Context Data: None.',
+      generated_at: new Date().toISOString(),
+    });
+  };
 
   return (
     <div style={{ padding: '30px', fontFamily: 'sans-serif', maxWidth: '900px', margin: 'auto' }}>

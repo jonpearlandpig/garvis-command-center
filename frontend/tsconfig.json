@@ -16,8 +16,13 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": ["node", "jest", "@testing-library/jest-dom"]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "vitest.config.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
