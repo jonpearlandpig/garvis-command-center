@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { operatorRegistry, type Operator, type OperatorCluster } from "../data/operatorRegistry";
 import { Search, ChevronDown, ChevronRight, Shield, Zap, Brain, Users, Star } from "lucide-react";
+import aiOfficeGif from "../assets/ai_office_animated.gif";
 
 const phaseColor: Record<string, string> = {
   Spark: "bg-amber-500/20 text-amber-300",
@@ -260,6 +261,22 @@ export default function PigPen() {
 
       {/* Body */}
       <main className="max-w-3xl mx-auto px-4 py-6 space-y-6">
+        {/* Silicon Pastoral — Animated AI Office */}
+        <div className="rounded-lg overflow-hidden border border-border shadow-md">
+          <img
+            src={aiOfficeGif}
+            alt="Silicon Pastoral — Animated AI office pixel art with blinking monitors, coffee steam, and a walking figure"
+            className="w-full h-auto"
+            loading="eager"
+          />
+          <div className="bg-card px-3 py-1.5 flex items-center justify-between">
+            <span className="text-[10px] font-mono text-muted-foreground tracking-wider">
+              SILICON PASTORAL · GARVIS COMMAND CENTER
+            </span>
+            <span className="text-[9px] text-muted-foreground">12 frames · 5 fps</span>
+          </div>
+        </div>
+
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-muted-foreground text-sm">
             No operators match "{search}"
