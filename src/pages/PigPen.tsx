@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { operatorRegistry, type Operator, type OperatorCluster } from "@/data/operatorRegistry";
+import { operatorRegistry, type Operator, type OperatorCluster } from "../data/operatorRegistry";
 import { Search, ChevronDown, ChevronRight, Shield, Zap, Brain, Users, Star } from "lucide-react";
 
 const phaseColor: Record<string, string> = {
