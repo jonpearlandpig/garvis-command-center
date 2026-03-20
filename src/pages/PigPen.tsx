@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { operatorRegistry, type Operator, type OperatorCluster } from "../data/operatorRegistry";
 import { Search, ChevronDown, ChevronRight, Shield, Zap, Brain, Users, Star } from "lucide-react";
+import aiOfficeGif from "../assets/ai_office_animated.gif";
 
 const phaseColor: Record<string, string> = {
   Spark: "bg-amber-500/20 text-amber-300",
